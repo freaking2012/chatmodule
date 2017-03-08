@@ -25,7 +25,7 @@
   
   
   <!-- embedded tomcat -->
-   <dependency>
+    <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-core</artifactId>
         <version>${tomcat.version}</version>
@@ -54,7 +54,7 @@
         <groupId>org.apache.tomcat</groupId>
         <artifactId>tomcat-jsp-api</artifactId>
         <version>${tomcat.version}</version>
-    </dependency>
+    </dependency> 
   
   <!-- https://mvnrepository.com/artifact/com.thetransactioncompany/cors-filter -->
 <dependency>

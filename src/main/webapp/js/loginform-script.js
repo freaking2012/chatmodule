@@ -62,7 +62,10 @@ $(document).ready(function() {
 			dataType: "json",
 			data: loginFormToJSON(),
 			success: function(data, textStatus, jqXHR){
-				location.href = "converse.html";
+				if(data!=null)
+				location.href = "converse.html?id="+data.id;
+				else
+					alert("Wrong username or password entered!!")
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				location.href = rootURL;
@@ -75,9 +78,9 @@ $(document).ready(function() {
 	function registerFormToJSON() {
 		return JSON.stringify({
 			"name": $('#idName').val(), 
-			"emailId": $('#idEmailId').val(),
+			"emailId": $('#idRegisterEmailId').val(),
 			"phoneNumber": $('#idPhoneNumber').val(),
-			"password": $('#idPassword').val()
+			"password": $('#idRegisterPassword').val()
 			});
 	}
 	
