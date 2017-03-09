@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-	var rootURL = "http://localhost:8080/chat/rest";
+	var rootURL = "https://eventmate.herokuapp.com/rest";
 
     $('#login-form-link').click(function(e) {
 		showLoginForm(e);

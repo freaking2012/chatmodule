@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	var rootURL = "http://localhost:8080/chat/rest/converse";
+	var rootURL = "https://eventmate.herokuapp.com/converse";
 	var userId = getParameterByName('id');
 	var currentUser;
 	var otherUsers;
