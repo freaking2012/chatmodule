@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	var rootURL = "https://eventmate.herokuapp.com/converse";
+	var rootURL = "https://eventmate.herokuapp.com/rest/converse";
 	var userId = getParameterByName('id');
 	var currentUser;
 	var otherUsers;
