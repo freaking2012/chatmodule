@@ -1,5 +1,7 @@
 package com.eventmate.ChatModule.utility;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,6 +12,53 @@ public class ConnectionHelper
 	private String url;
 	private static ConnectionHelper instance;
 
+	public static Connection getPostGreConnection(){
+		try {
+
+			Class.forName("org.postgresql.Driver");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Where is your PostgreSQL JDBC Driver? "
+					+ "Include in your library path!");
+			e.printStackTrace();
+		}
+		
+		System.out.println("PostgreSQL JDBC Driver Registered!");
+		
+		Connection connection = null;
+
+		try {
+
+			//Following line gets connection for local db
+			//connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/eventmate", "postgres","");
+			
+			//Following 2 lines get connection for Heroku db
+			URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+		    String username = dbUri.getUserInfo().split(":")[0];
+		    String password = dbUri.getUserInfo().split(":")[1];
+		    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+		    connection = DriverManager.getConnection(dbUrl, username, password);
+
+		} catch (SQLException e) {
+
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (connection != null) {
+			return connection;
+		} else {
+			System.out.println("Failed to make connection!");
+		}
+		return null;
+	}
 	private ConnectionHelper()
 	{
     	String driver = null;

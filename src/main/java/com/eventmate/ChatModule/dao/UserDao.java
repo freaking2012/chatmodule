@@ -13,11 +13,11 @@ import com.eventmate.ChatModule.utility.ConnectionHelper;
 public class UserDao {
 	
 	 public UserDo getUserDoByEmailIdAndPassword(UserDo userDo) {
-	    	String sql = "SELECT * FROM user WHERE email_id = ? and password = ?";
+	    	String sql = "SELECT * FROM useraccount WHERE email_id = ? and password = ?";
 	        UserDo dbUserDo = null;
 	        Connection c = null;
 	        try {
-	            c = ConnectionHelper.getConnection();
+	            c = ConnectionHelper.getPostGreConnection();
 	            PreparedStatement ps = c.prepareStatement(sql);
 	            ps.setString(1, userDo.getEmailId());
 	            ps.setString(2, userDo.getPassword());
@@ -35,11 +35,11 @@ public class UserDao {
 	    }
 	 
 	 public UserDo getUserDoById(Integer id) {
-		 String sql = "SELECT * FROM user WHERE id = ?";
+		 String sql = "SELECT * FROM useraccount WHERE id = ?";
 		 UserDo dbUserDo = null;
 		 Connection c = null;
 		 try {
-			 c = ConnectionHelper.getConnection();
+			 c = ConnectionHelper.getPostGreConnection();
 			 PreparedStatement ps = c.prepareStatement(sql);
 			 ps.setInt(1, id);
 			 ResultSet rs = ps.executeQuery();
@@ -58,9 +58,9 @@ public class UserDao {
 	 public List<UserDo> getOtherUsers(Integer id) {
 	        List<UserDo> list = new ArrayList<UserDo>();
 	        Connection c = null;
-	    	String sql = "SELECT * FROM user WHERE id != ? ORDER BY name";
+	    	String sql = "SELECT * FROM useraccount WHERE id != ? ORDER BY name";
 	        try {
-	            c = ConnectionHelper.getConnection();
+	            c = ConnectionHelper.getPostGreConnection();
 	            PreparedStatement ps = c.prepareStatement(sql);
 				 ps.setInt(1, id);
 				 ResultSet rs = ps.executeQuery();
@@ -80,14 +80,14 @@ public class UserDao {
 	        Connection c = null;
 	        PreparedStatement ps = null;
 	        try {
-	            c = ConnectionHelper.getConnection();
-	            ps = c.prepareStatement("INSERT INTO user (name, email_id,password, phone_number,is_logged_in) VALUES ( ?,?, ?, ?,?)",
-	                new String[] { "ID" });
+	            c = ConnectionHelper.getPostGreConnection();
+	            ps = c.prepareStatement("INSERT INTO useraccount (name, email_id,password, phone_number,is_logged_in) VALUES ( ?,?, ?, ?,?)",
+	                new String[] { "id" });
 	            ps.setString(1, userDo.getName());
 	            ps.setString(2, userDo.getEmailId());
 	            ps.setString(3, userDo.getPassword());
 	            ps.setString(4, userDo.getPhoneNumber());
-	            ps.setBoolean(5, userDo.isLoggedIn());
+	            ps.setInt(5, userDo.isLoggedIn());
 	            ps.executeUpdate();
 	            ResultSet rs = ps.getGeneratedKeys();
 	            rs.next();
@@ -102,8 +102,6 @@ public class UserDao {
 			}
 	        return userDo;
 	    }
-	 
-	
 	
 	protected UserDo processRow(ResultSet rs) throws SQLException {
 		UserDo userDo = new UserDo();

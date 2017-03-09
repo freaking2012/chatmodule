@@ -12,7 +12,7 @@ public class UserDo implements java.io.Serializable {
 	private String password;
 	private String emailId;
 	private String phoneNumber;
-	private boolean isLoggedIn;
+	private int isLoggedIn;
 	public int getId() {
 		return id;
 	}
@@ -37,10 +37,10 @@ public class UserDo implements java.io.Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public boolean isLoggedIn() {
+	public int isLoggedIn() {
 		return isLoggedIn;
 	}
-	public void setLoggedIn(boolean isLoggedIn) {
+	public void setLoggedIn(int isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
 	}
 	public String getPassword() {
