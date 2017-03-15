@@ -23,7 +23,6 @@ public class ClientService implements Runnable{
 	private static final int PORT_NUMBER = 9999;
 	private static String HOST_ADDRESS = "172.20.10.10"; 
 	
-	public void sendMessage()
 
 	public void createClient()
 	{
